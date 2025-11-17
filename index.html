@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АПЛ - Английская Премьер-Лига | Официальный сайт</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --premier-league-purple: #3D195B;
+            --premier-league-red: #E31E24;
+            --premier-league-blue: #0096D6;
+            --premier-league-green: #00A650;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--premier-league-purple) 0%, #1a0a2e 100%);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--premier-league-red) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(61, 25, 91, 0.85), rgba(61, 25, 91, 0.9)), 
+                        url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1771&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .match-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .live-badge {
+            background-color: var(--premier-league-red);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .team-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+        
+        .table-row {
+            transition: background-color 0.2s;
+        }
+        
+        .table-row:hover {
+            background-color: rgba(61, 25, 91, 0.05);
+        }
+        
+        .stats-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stats-icon {
+            font-size: 2.5rem;
+            color: var(--premier-league-purple);
+        }
+        
+        .player-card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .player-photo {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--premier-league-purple);
+        }
+        
+        .btn-primary {
+            background-color: var(--premier-league-purple);
+            border-color: var(--premier-league-purple);
+        }
+        
+        .btn-primary:hover {
+            background-color: #2d1145;
+            border-color: #2d1145;
+        }
+        
+        .btn-outline-primary {
+            color: var(--premier-league-purple);
+            border-color: var(--premier-league-purple);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--premier-league-purple);
+            border-color: var(--premier-league-purple);
+        }
+        
+        .badge-primary {
+            background-color: var(--premier-league-purple);
+        }
+        
+        .champions-league {
+            background-color: #1a6fb4;
+            color: white;
+        }
+        
+        .europa-league {
+            background-color: #6c3;
+            color: white;
+        }
+        
+        .conference-league {
+            background-color: #8b5cf6;
+            color: white;
+        }
+        
+        .relegation {
+            background-color: #e31e24;
+            color: white;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+        
+        .news-card {
+            transition: transform 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        footer {
+            background-color: var(--premier-league-purple);
+            color: white;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--premier-league-purple);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .match-time {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .match-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .team-name {
+            font-weight: 600;
+        }
+        
+        .stats-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--premier-league-purple);
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-futbol me-2"></i>АПЛ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#matches">Матчи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#table">Турнирная таблица</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#stats">Статистика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#players">Игроки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news">Новости</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Герой-секция -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Английская Премьер-Лига</h1>
+                    <p class="lead mb-4">Следите за лучшим футбольным чемпионатом мира. Результаты матчей, турнирная таблица, статистика игроков и многое другое.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#matches" class="btn btn-primary btn-lg">Ближайшие матчи</a>
+                        <a href="#table" class="btn btn-outline-light btn-lg">Турнирная таблица</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f2/Premier_League_Logo.svg/1200px-Premier_League_Logo.svg.png" 
+                         alt="Логотип АПЛ" class="img-fluid" style="max-height: 300px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Ближайшие матчи -->
+<section id="matches" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Ближайшие матчи</h2>
+        
+        <div class="row mb-4">
+            <div class="col-12">
+                <ul class="nav nav-pills justify-content-center">
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Матч 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card match-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="match-time">Суббота, 15:00</span>
+                            <span class="badge bg-danger live-badge">LIVE</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" 
+                                     alt="Арсенал" class="team-logo mb-2">
+                                <div class="team-name">Арсенал</div>
+                            </div>
+                            <div class="match-score mx-2">2 - 1</div>
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/f/f7/FC_Chelsea_Logo.svg" 
+                                     alt="Челси" class="team-logo mb-2">
+                                <div class="team-name">Челси</div>
+                            </div>
+                        </div>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" style="width: 65%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted">
+                            <span>Владение: 65%</span>
+                            <span>Удары: 14</span>
+                            <span>Угловые: 7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Матч 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card match-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="match-time">Суббота, 17:30</span>
+                            <span class="badge bg-secondary">18:30</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/7/7a/Manchester_United_FC_crest.svg" 
+                                     alt="Манчестер Юнайтед" class="team-logo mb-2">
+                                <div class="team-name">Ман Юнайтед</div>
+                            </div>
+                            <div class="match-score mx-2">- : -</div>
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/7/73/FC_Liverpool_Logo.svg" 
+                                     alt="Ливерпуль" class="team-logo mb-2">
+                                <div class="team-name">Ливерпуль</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Матч 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card match-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="match-time">Воскресенье, 16:00</span>
+                            <span class="badge bg-secondary">16:00</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/9/96/Manchester_City_FC.svg" 
+                                     alt="Манчестер Сити" class="team-logo mb-2">
+                                <div class="team-name">Ман Сити</div>
+                            </div>
+                            <div class="match-score mx-2">- : -</div>
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/9/99/Tottenham_Hotspur_FC_Logo_2024.png" 
+                                     alt="Тоттенхэм" class="team-logo mb-2">
+                                <div class="team-name">Тоттенхэм</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Матч 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card match-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="match-time">Воскресенье, 16:00</span>
+                            <span class="badge bg-secondary">16:00</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/6/62/Burnley_F.C._Logo.svg" 
+                                     alt="Бёрнли" class="team-logo mb-2">
+                                <div class="team-name">Бёрнли</div>
+                            </div>
+                            <div class="match-score mx-2">- : -</div>
+                            <div class="text-center flex-grow-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/2/24/FC_Brighton_%26_Hove_Albion_Logo.svg"
+                                     alt="Брайтон" class="team-logo mb-2">
+                                <div class="team-name">Брайтон</div>
+                            </div>
+                        </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="schedule.html" class="btn btn-primary">Полное расписание матчей</a>
+        </div>
+    </div>
+</section>
+
+    <!-- Турнирная таблица -->
+    <section id="table" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Турнирная таблица</h2>
+            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Команда</th>
+                            <th scope="col">И</th>
+                            <th scope="col">В</th>
+                            <th scope="col">Н</th>
+                            <th scope="col">П</th>
+                            <th scope="col">ЗМ</th>
+                            <th scope="col">ПМ</th>
+                            <th scope="col">РМ</th>
+                            <th scope="col">О</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td><span class="badge bg-primary">1</span></td>
+                            <td>
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" 
+                                     alt="Арсенал" class="team-logo me-2" style="width: 30px; height: 30px;">
+                                Арсенал
+                            </td>
+                            <td>28</td>
+                            <td>22</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>66</td>
+                            <td>26</td>
+                            <td>+40</td>
+                            <td><strong>69</strong></td>
+                        </tr>
+                        <tr class="table-row">
+                            <td><span class="badge bg-primary">2</span></td>
+                            <td>
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/9/96/Manchester_City_FC.svg" 
+                                     alt="Манчестер Сити" class="team-logo me-2" style="width: 30px; height: 30px;">
+                                Манчестер Сити
+                            </td>
+                            <td>27</td>
+                            <td>19</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>67</td>
+                            <td>25</td>
+                            <td>+42</td>
+                            <td><strong>61</strong></td>
+                        </tr>
+                        <tr class="table-row champions-league">
+                            <td><span class="badge bg-primary">3</span></td>
+                            <td>
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/7/7a/Manchester_United_FC_crest.svg" 
+                                     alt="Манчестер Юнайтед" class="team-logo me-2" style="width: 30px; height: 30px;">
+                                Манчестер Юнайтед
+                            </td>
+                            <td>26</td>
+                            <td>15</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>41</td>
+                            <td>35</td>
+                            <td>+6</td>
+                            <td><strong>50</strong></td>
+                        </tr>
+                        <tr class="table-row champions-league">
+                            <td><span class="badge bg-primary">4</span></td>
+                            <td>
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/7/73/FC_Liverpool_Logo.svg" 
+                                     alt="Ливерпуль" class="team-logo me-2" style="width: 30px; height: 30px;">
+                                Ливерпуль
+                            </td>
+                            <td>26</td>
+                            <td>12</td>
+                            <td>6</td>
+                            <td>8</td>
+                            <td>47</td>
+                            <td>29</td>
+                            <td>+18</td>
+                            <td><strong>42</strong></td>
+                        </tr>
+                        <tr class="table-row europa-league">
+                            <td><span class="badge bg-primary">5</span></td>
+                            <td>
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/9/99/Tottenham_Hotspur_FC_Logo_2024.png" 
+                                     alt="Тоттенхэм" class="team-logo me-2" style="width: 30px; height: 30px;">
+                                Тоттенхэм
+                            </td>
+                            <td>27</td>
+                            <td>12</td>
+                            <td>5</td>
+                            <td>10</td>
+                            <td>45</td>
+                            <td>42</td>
+                            <td>+3</td>
+                            <td><strong>41</strong></td>
+                        </tr>
+                        <tr class="table-row conference-league">
+                            <td><span class="badge bg-primary">6</span></td>
+                            <td>
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/f/f7/FC_Chelsea_Logo.svg" 
+                                     alt="Челси" class="team-logo me-2" style="width: 30px; height: 30px;">
+                                Челси
+                            </td>
+                            <td>26</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>9</td>
+                            <td>28</td>
+                            <td>31</td>
+                            <td>-3</td>
+                            <td><strong>37</strong></td>
+                        </tr>
+                        <!-- Добавьте больше строк по аналогии -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-3">
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge champions-league">Лига Чемпионов</span>
+                    <span class="badge europa-league">Лига Европы</span>
+                    <span class="badge conference-league">Лига Конференций</span>
+                    <span class="badge relegation">Выбывание</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section id="stats" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Статистика</h2>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <ul class="nav nav-pills justify-content-center">
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stats-card">
+                        <div class="card-body text-center p-4">
+                            <div class="stats-icon mb-3">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <div class="stats-value">28</div>
+                            <div class="stats-label">Забитых голов</div>
+                            <p class="mt-2 mb-0 small">Эрлинг Холанн (Ман Сити)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stats-card">
+                        <div class="card-body text-center p-4">
+                            <div class="stats-icon mb-3">
+                                <i class="fas fa-hands"></i>
+                            </div>
+                            <div class="stats-value">14</div>
+                            <div class="stats-label">Голевых передач</div>
+                            <p class="mt-2 mb-0 small">Кевин Де Брёйне (Ман Сити)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stats-card">
+                        <div class="card-body text-center p-4">
+                            <div class="stats-icon mb-3">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="stats-value">15</div>
+                            <div class="stats-label">Сухих матчей</div>
+                            <p class="mt-2 mb-0 small">Алисон Беккер (Ливерпуль)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stats-card">
+                        <div class="card-body text-center p-4">
+                            <div class="stats-icon mb-3">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <div class="stats-value">324.5</div>
+                            <div class="stats-label">Пробег (км)</div>
+                            <p class="mt-2 mb-0 small">Джеймс Милнер (Ливерпуль)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <h4>Лучшие бомбардиры</h4>
+                    <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">1. Эрлинг Холанн</span> (Манчестер Сити)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">28</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">2. Гарри Кейн</span> (Тоттенхэм)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">22</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">3. Иван Тони</span> (Брентфорд)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">18</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">4. Мохаммед Салах</span> (Ливерпуль)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">17</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">5. Маркус Рэшфорд</span> (Манчестер Юнайтед)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">16</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h4>Лучшие ассистенты</h4>
+                    <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">1. Кевин Де Брёйне</span> (Манчестер Сити)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">14</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">2. Букайо Сака</span> (Арсенал)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">11</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">3. Лиандо Троссар</span> (Арсенал)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">9</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">4. Мохаммед Салах</span> (Ливерпуль)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">8</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold">5. Джеймс Мэддисон</span> (Лестер Сити)
+                            </div>
+                            <span class="badge bg-primary rounded-pill">8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Игроки -->
+<section id="players" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Лучшие игроки</h2>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card player-card">
+                     <img src="https://avatars.mds.yandex.net/get-entity_search/5107294/1177724504/S600xU_2x" 
+                             alt="Эрлинг Холанн" class="player-photo">
+                    <div class="card-body">
+                        <h5 class="card-title">Эрлинг Холанн</h5>
+                        <p class="card-text">Манчестер Сити</p>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Нападающий</small>
+                            <small class="text-muted">28 голов</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card player-card">
+                    <img src="https://avatars.mds.yandex.net/get-entity_search/10920629/1204601322/S600xU_2x" 
+                             alt="Кевин Де Брёйне" class="player-photo">
+                    <div class="card-body">
+                        <h5 class="card-title">Кевин Де Брёйне</h5>
+                        <p class="card-text">Манчестер Сити</p>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Полузащитник</small>
+                            <small class="text-muted">14 передач</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card player-card">
+                    <img src="https://avatars.mds.yandex.net/get-entity_search/5098055/1204341662/S600xU_2x" 
+                             alt="Букайо Сака" class="player-photo">
+                    <div class="card-body">
+                        <h5 class="card-title">Букайо Сака</h5>
+                        <p class="card-text">Арсенал</p>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Нападающий</small>
+                            <small class="text-muted">12 голов</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card player-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=7c1b025e2074e52b088d448f1a613553c76b995a-7758455-images-thumbs&n=13" 
+                         alt="Мохаммед Салах" class="player-photo">
+                    <div class="card-body">
+                        <h5 class="card-title">Мохаммед Салах</h5>
+                        <p class="card-text">Ливерпуль</p>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Нападающий</small>
+                            <small class="text-muted">17 голов</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="all-players.html" class="btn btn-primary">Все игроки</a>
+        </div>
+    </div>
+</section>
+
+    <!-- Новости -->
+<section id="news" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Последние новости</h2>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=6186e6b91a8985028852fcbe526ebbb47cd104ea-12179271-images-thumbs&n=13" 
+                         alt="Новость 1" class="news-image">
+                    <div class="card-body">
+                        <h5 class="card-title">Арсенал одержал важную победу над Челси</h5>
+                        <p class="card-text">Гуннеры продолжают борьбу за титул, обыграв Челси со счетом 2:1 в лондонском дерби.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">2 часа назад</small>
+                            <a href="news-arsenal-chelsi.html" class="btn btn-sm btn-outline-primary">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=f8ec6fdeec3506fefd3aecc184fc96809d0d58e3-10701561-images-thumbs&n=13" 
+                         alt="Новость 2" class="news-image">
+                    <div class="card-body">
+                        <h5 class="card-title">Холанн устанавливает новый рекорд</h5>
+                        <p class="card-text">Норвежец забил уже 28 голов в этом розыгрыше АПЛ, повторив рекорд АПЛ по количеству голов в дебютном сезоне.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">5 часов назад</small>
+                            <a href="news-haaland-record.html" class="btn btn-sm btn-outline-primary">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=84344661e7567785634f8e1a9b9f92dbe97ce6a0-5879172-images-thumbs&n=13" 
+                         alt="Новость 3" class="news-image">
+                    <div class="card-body">
+                        <h5 class="card-title">Трансферные слухи: Кейн может покинуть Тоттенхэм</h5>
+                        <p class="card-text">Нападающий сборной Англии рассматривает варианты ухода из клуба летом.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">1 день назад</small>
+                            <a href="news-kane-transfer.html" class="btn btn-sm btn-outline-primary">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="all-news.html" class="btn btn-primary">Все новости</a>
+        </div>
+    </div>
+</section>
+
+  <!-- Футер -->
+<footer class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2025 Английская Премьер-Лига. Все права защищены.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="https://t.me/telingaterEPL" class="text-decoration-none text-light me-3" title="Telegram канал АПЛ">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://vk.com/uefa_fans" class="text-decoration-none text-light" title="ВКонтакте АПЛ">
+                    <i class="fab fa-vk"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer> 
+
+   <!-- Кнопка "Наверх" -->
+<a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<!-- Подключение Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Плавная прокрутка для якорных ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Показ/скрытие кнопки "Наверх" и её функционал
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+    
+    // Обработчик клика по кнопке "Наверх"
+    backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Обновление времени матчей (пример)
+    function updateMatchTimes() {
+        const now = new Date();
+        const matchElements = document.querySelectorAll('.match-time');
+        
+        matchElements.forEach(element => {
+            const matchTime = element.textContent.split(', ')[1];
+            // Здесь можно добавить логику для обновления времени до начала матча
+        });
+    }
+    
+    // Запуск обновления времени каждую минуту
+    setInterval(updateMatchTimes, 60000);
+</script>
+</body>
+</html>
