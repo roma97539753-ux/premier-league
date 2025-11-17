@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все новости АПЛ - Английская Премьер-Лига</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --premier-league-purple: #3D195B;
+            --premier-league-red: #E31E24;
+        }
+        
+        .news-header {
+            background: linear-gradient(135deg, var(--premier-league-purple) 0%, #1a0a2e 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .news-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .news-image {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .badge-exclusive {
+            background-color: var(--premier-league-red);
+        }
+        
+        .news-category {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .read-time {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .filter-buttons .btn {
+            margin: 0 5px 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="premier-league.html">
+                <i class="fas fa-arrow-left me-2"></i>Назад к АПЛ
+            </a>
+            <div class="navbar-text">
+                <i class="fas fa-newspaper me-2"></i>Все новости
+            </div>
+        </div>
+    </nav>
+
+    <!-- Шапка -->
+    <div class="news-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold">Все новости АПЛ</h1>
+                    <p class="lead mb-4">Самые свежие и актуальные новости Английской Премьер-Лиги</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Поиск новостей...">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Главная новость -->
+            <div class="col-12 mb-5">
+                <div class="card news-card">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="https://avatars.mds.yandex.net/i?id=f8ec6fdeec3506fefd3aecc184fc96809d0d58e3-10701561-images-thumbs&n=13" 
+                                 class="news-image h-100" alt="Холанн рекорд">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body p-4 d-flex flex-column h-100">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-exclusive">Эксклюзив</span>
+                                    <small class="text-muted">5 часов назад</small>
+                                </div>
+                                <h3 class="card-title">Холанн устанавливает новый рекорд АПЛ</h3>
+                                <p class="card-text flex-grow-1">Норвежец забил уже 28 голов в этом розыгрыше АПЛ, повторив рекорд АПЛ по количеству голов в дебютном сезоне.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="news-category">Рекорды</span>
+                                    <a href="news-haaland-record.html" class="btn btn-primary">Читать</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Новость 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=6186e6b91a8985028852fcbe526ebbb47cd104ea-12179271-images-thumbs&n=13" 
+                         class="news-image" alt="Арсенал - Челси">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="news-category">Матчи</span>
+                            <small class="text-muted">2 часа назад</small>
+                        </div>
+                        <h5 class="card-title">Арсенал одержал важную победу над Челси</h5>
+                        <p class="card-text">Гуннеры продолжают борьбу за титул, обыграв Челси со счетом 2:1 в лондонском дерби.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="read-time">📖 3 мин</span>
+                            <a href="news-arsenal-chelsi.html" class="btn btn-outline-primary btn-sm">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Новость 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=84344661e7567785634f8e1a9b9f92dbe97ce6a0-5879172-images-thumbs&n=13" 
+                         class="news-image" alt="Гарри Кейн">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="news-category">Трансферы</span>
+                            <small class="text-muted">1 день назад</small>
+                        </div>
+                        <h5 class="card-title">Трансферные слухи: Кейн может покинуть Тоттенхэм</h5>
+                        <p class="card-text">Нападающий сборной Англии рассматривает варианты ухода из клуба летом.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="read-time">📖 4 мин</span>
+                            <a href="news-kane-transfer.html" class="btn btn-outline-primary btn-sm">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Новость 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=ad92c45b9aa82b69d794a34c88a39edf7d0efd24-10815658-images-thumbs&n=13" 
+                         class="news-image" alt="Манчестер Юнайтед">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="news-category">Кризис</span>
+                            <small class="text-muted">3 часа назад</small>
+                        </div>
+                        <h5 class="card-title">Кризис в Манчестер Юнайтед углубляется</h5>
+                        <p class="card-text">После разгромного поражения от Ливерпуля будущее Эрика тен Хага оказалось под вопросом.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="read-time">📖 5 мин</span>
+                            <a href="news-manutd-crisis.html" class="btn btn-outline-primary btn-sm">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Новость 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card news-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=512ac3514863b5cc36659c20d0cc032d_l-5425877-images-thumbs&n=13" 
+                         class="news-image" alt="Арсенал">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="news-category">Турнирная таблица</span>
+                            <small class="text-muted">6 часов назад</small>
+                        </div>
+                        <h5 class="card-title">Арсенал возглавил таблицу АПЛ</h5>
+                        <p class="card-text">Впервые за 10 лет "пушкари" лидируют в чемпионате за 5 туров до его завершения.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="read-time">📖 3 мин</span>
+                            <a href="news-arsenal-title.html" class="btn btn-outline-primary btn-sm">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Английская Премьер-Лига. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="https://t.me/telingaterEPL" class="text-decoration-none text-light me-3">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://vk.com/uefa_fans" class="text-decoration-none text-light">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
